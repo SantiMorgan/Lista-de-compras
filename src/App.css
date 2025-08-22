@@ -1,0 +1,164 @@
+/* ===== Contenedor principal ===== */
+.app-container{
+  width: min(94vw, 760px);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.3rem 1.1rem;
+  box-shadow: var(--shadow);
+  display:flex; flex-direction:column; gap:1rem;
+  overflow: hidden; /* recorta cualquier desborde visual interno */
+}
+
+.app-container h1{
+  position:relative; padding-bottom:.5rem; margin: 0 0 .25rem;
+  text-align: center;
+}
+.app-container h1::after{
+  content:""; position:absolute; left:50%; transform:translateX(-50%);
+  bottom:0; width:110px; height:2px; border-radius:999px;
+  background: var(--accent); opacity:.6;
+}
+
+/* ===== Formulario (limpio, amplio y sin desbordes) ===== */
+.shop-form{
+  display:grid;
+  grid-template-columns: minmax(0,1.5fr) minmax(0,.7fr) minmax(0,.9fr) auto; /* evita empujes */
+  gap:.7rem; align-items:start;
+}
+
+.shop-input{
+  width: 100%;
+  padding: 1rem 1.1rem;
+  font-size: 1.05rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  color: inherit;
+  transition: box-shadow .2s, border-color .15s;
+}
+.shop-input::placeholder{ color: var(--muted) }
+.shop-input:focus{
+  border-color: #99f6e4;
+  box-shadow: 0 0 0 4px rgba(13,148,136,.15);
+  outline: none;
+}
+
+/* botón Agregar coherente con el tema */
+.shop-form button{
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  padding: .95rem 1.2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter .15s, transform .06s;
+}
+.shop-form button:hover{ filter: brightness(1.05) saturate(1.02) }
+.shop-form button:active{ transform: translateY(1px) }
+
+/* Quita flechitas de los number (opcional) */
+.shop-input::-webkit-outer-spin-button,
+.shop-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.shop-input[type="number"]
+
+/* ===== Tabla/Lista ===== */
+.shop-table{
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+@media (prefers-color-scheme: dark){
+  .shop-table{ background:#0f1519; }
+}
+
+/* Encabezado */
+.shop-head{
+  display:grid;
+  grid-template-columns: 1.5fr .8fr 1fr 1fr auto;
+  gap:.6rem; align-items:center;
+  padding:.75rem .9rem;
+  font-weight: 700; letter-spacing:.01em;
+  background: #f4fbfb;
+  border-bottom: 1px solid var(--border);
+}
+@media (prefers-color-scheme: dark){
+  .shop-head{ background:#091416; }
+}
+
+/* Fila */
+.shop-row{
+  display:grid;
+  grid-template-columns: 1.5fr .8fr 1fr 1fr auto;
+  gap:.7rem; align-items:center;
+  padding: .85rem .9rem;
+  border-bottom: 1px solid var(--border);
+  transition: background-color .15s ease;
+}
+.shop-row:nth-child(odd){ background: #faf8f5; }
+.shop-row:hover{ background: #f1fbfb; }
+@media (prefers-color-scheme: dark){
+  .shop-row:nth-child(odd){ background: #0f1316; }
+  .shop-row:hover{ background: #0b1b1b; }
+}
+.shop-row:last-child{ border-bottom:none }
+
+/* Celdas */
+.shop-name{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.shop-price, .shop-subtotal{ font-variant-numeric: tabular-nums; }
+
+/* Cantidad con pills */
+.shop-qty{ display:inline-flex; align-items:center; gap:.6rem; }
+.pill{
+  border:1px solid var(--border);
+  background:#fff; color:var(--text);
+  padding:.28rem .6rem;
+  border-radius: 999px;
+  cursor:pointer;
+  transition: background-color .15s, transform .06s;
+}
+.pill:hover{ background:#f0fdfa }
+.pill:active{ transform: translateY(1px) }
+.qty{ min-width:2ch; text-align:center; font-weight:600 }
+
+/* Botón eliminar */
+.shop-remove{
+  border:1px solid var(--danger);
+  background:transparent; color:var(--danger);
+  padding:.38rem .65rem;
+  border-radius:10px;
+  font-weight:800; cursor:pointer;
+  transition: background-color .15s, transform .06s;
+}
+.shop-remove:hover{ background: color-mix(in oklab, var(--danger), #ffffff 90%) }
+.shop-remove:active{ transform: translateY(1px) }
+
+/* ===== Footer ===== */
+.shop-footer{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:.9rem; padding-top:.5rem;
+}
+.shop-total{ font-size:1.1rem; }
+.shop-total strong{
+  padding:.1rem .4rem; border-radius: .4rem; background:#ecfeff;
+}
+.outline{
+  background: transparent; color: var(--accent-ink);
+  border: 1px solid var(--accent);
+  border-radius: 12px; padding:.55rem 1rem;
+}
+.outline:hover{ background:#e6fffb }
+
+/* ===== Responsive ===== */
+@media (max-width: 760px){
+  .shop-form{ grid-template-columns: 1fr 1fr 1fr; }
+  .shop-form button{ grid-column: 1 / -1; }
+  .shop-head, .shop-row{ grid-template-columns: 1fr .9fr 1fr 1fr auto; }
+}
+@media (max-width: 520px){
+  .shop-head, .shop-row{ grid-template-columns: 1fr 1fr 1fr; }
+  .shop-price{ display:none; }
+  .shop-subtotal{ justify-self: end; }
+}
