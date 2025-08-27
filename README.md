@@ -15,8 +15,6 @@ Aplicación simple para gestionar una lista de compras: permite agregar, marcar 
 - **Persistencia en `localStorage`** para mantener la lista
 - (Opcional) Botón para **vaciar** la lista
 
-> Ajustá esta lista según lo que implementaste.
-
 ---
 
 ## 🛠️ Tecnologías
